@@ -1,16 +1,16 @@
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
-from django.db.models import Index
 from django.utils.translation import gettext_lazy as _
 
 from app.common.models import BaseDateAuditModel
 from app.likes.models import Like
+from config import settings
 
 
 class Post(BaseDateAuditModel):
-    body = models.TextField
+    body = models.TextField()
     title = models.CharField(max_length=50)
-    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='posts', on_delete=models.CASCADE)
     likes = GenericRelation(Like)
 
     def __str__(self):
@@ -20,14 +20,6 @@ class Post(BaseDateAuditModel):
     def total_likes(self):
         return self.likes.count()
 
-    @property
-    def title(self):
-        return self.title
-
     class Meta:
         verbose_name = _('Post')
         verbose_name_plural = _('Posts')
-
-        # indexes = [
-        #     Index(fields=('title', ))
-        # ]

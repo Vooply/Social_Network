@@ -24,6 +24,7 @@ def is_fan(obj, user):
     likes = Like.objects.filter(content_type=obj_type, object_id=obj.id, user=user)
     return likes.exists()
 
+
 def get_fans(obj):
     obj_type = ContentType.objects.get_for_model(obj)
     return User.objects.filter(likes__content_type=obj_type, likes__object_id=obj.id)

@@ -1,9 +1,9 @@
 
 migrations:
-	@docker exec -it -w /Social_Network Social_Network_api python src/manage.py makemigrations
+	@docker exec -it -w /Social_Network Social_Network_apii python src/manage.py makemigrations
 
 migrate:
-	@docker exec -it -w /Social_Network Social_Network_api python src/manage.py migrate
+	@docker exec -it -w /Social_Network Social_Network_apii python src/manage.py migrate
 
 app:
 	@mkdir -p src/app/$(name)

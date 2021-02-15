@@ -6,6 +6,8 @@ from app.posts.models import Post
 
 class PostSerializer(serializers.ModelSerializer):
     is_fan = serializers.SerializerMethodField()
+    comments = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    user = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
         model = Post
@@ -17,6 +19,7 @@ class PostSerializer(serializers.ModelSerializer):
             'created_at',
             'total_likes',
             'is_fan',
+            'comments',
         )
 
     def get_is_fan(self, obj):

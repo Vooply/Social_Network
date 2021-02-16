@@ -16,7 +16,7 @@ test_env:
 	@cat ./docker/envs/env_example > ./docker/envs/.env-local
 
 test_user:
-	@docker exec -it -w /Social_Network Social_Network_api python src/manage.py createsuperuser
+	@docker exec -it -w /Social_Network Social_Network_apii python src/manage.py createsuperuser
 
 build_compose:
 	@docker-compose -f docker-compose-dev.yml build
